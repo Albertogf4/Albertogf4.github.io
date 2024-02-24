@@ -8,3 +8,5 @@ Este es un juego simple donde los jugadores tienen que adivinar los autores de c
 2. El jugador tiene elegir el autor correcto entre 4 opciones.
 3. Si el jugador adivina correctamente, gana un punto.
 6. La puntuación del jugador se muestra al final del juego.
+
+### Alberto García Fábregas

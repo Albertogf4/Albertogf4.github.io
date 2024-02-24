@@ -48,7 +48,7 @@ class Pregunta extends HTMLElement {
   }
 
   async generateQuestions() {
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 5; i++) {
       const quoteData = await this.getQuote();
       const correctAuthor = quoteData.author;
       const incorrectAuthors = [];
@@ -104,7 +104,7 @@ class Pregunta extends HTMLElement {
         }
         setTimeout(() => {
           this.currentQuestionIndex++;
-          if (this.currentQuestionIndex < 10) {
+          if (this.currentQuestionIndex < 5) {
             this.displayQuestion();
           } else {
             this.showResult();
@@ -116,9 +116,9 @@ class Pregunta extends HTMLElement {
 
   showResult() {
     let result;
-    if (this.correctAnswers >= 8) {
+    if (this.correctAnswers >= 5) {
       result = "¡Enhorabuena!";
-    } else if (this.correctAnswers >= 5) {
+    } else if (this.correctAnswers >= 3) {
       result = "¡Buen trabajo!";
     } else {
       result = "¡Sigue practicando!";
@@ -126,7 +126,7 @@ class Pregunta extends HTMLElement {
     this.shadowRoot.innerHTML = `
       <style>${styles}</style>
       <h2>Resultados</h2>
-      <p>Respuestas correctas: ${this.correctAnswers} / 10</p>
+      <p>Respuestas correctas: ${this.correctAnswers} de 5</p>
       <p>${result}</p>
       <button id="replayButton">Volver a jugar</button>
     `;
@@ -134,6 +134,14 @@ class Pregunta extends HTMLElement {
       location.reload();
     });
   } 
+
+  shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
 
   async getQuote() {
     document.getElementById('preguntas').classList.add('hidden');
@@ -146,14 +154,7 @@ class Pregunta extends HTMLElement {
     return data;
   }
 
-  shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  }
+  
 }
-
 customElements.define('elemento-pregunta', Pregunta);
 
