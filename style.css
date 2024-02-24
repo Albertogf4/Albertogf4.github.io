@@ -1,0 +1,56 @@
+body {
+    font-family: "Times New Roman", serif;
+    margin: 0;
+}
+/*Cargando*/
+
+.carga {
+    background-image: url("img/fondo_de_pluma.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    height: 100vh;
+
+    color:white;
+    text-align: center;
+    display: flex;
+
+}
+h1 {
+    margin: 20px;
+    text-align: center;
+    font-size: 48px;
+    color: white;
+
+    overflow: auto;
+}
+
+/*Preguntas*/
+.preguntas {
+    background-image: url("img/fondo_escritura.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    color:white;
+    display: flex;
+    height: 100vh;
+    font-size: 30px;
+  
+}
+
+
+.hidden {
+    display: none;
+}
+
+
+
+
+
+
+
