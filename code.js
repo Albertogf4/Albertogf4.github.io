@@ -1,38 +1,3 @@
-/*Estilos para elementos del js*/
-const styles = `
-
-
-.options {
-  margin-top: 20px;
-}
-
-.options div {
-  margin-bottom: 5px;
-}
-
-button {
-  padding: 10px; 
-  width:300px; 
-  border-radius: 5px;
-  transition: transform 0.2s;
-}
-
-button:hover {
-  cursor: pointer;
-  transform: scale(1.1);
-}
-
-.correct {
- background-color: #67d467; 
-}
-
-.incorrect {
- background-color: #cb5555; 
-}
-
-
-`;
-
 class Pregunta extends HTMLElement {
   constructor() {
     super();
@@ -47,6 +12,7 @@ class Pregunta extends HTMLElement {
     this.displayQuestion();
   }
 
+  /*Función para generar las preguntas*/
   async generateQuestions() {
     for (let i = 0; i < 5; i++) {
       const quoteData = await this.getQuote();
@@ -75,6 +41,7 @@ class Pregunta extends HTMLElement {
     }
   }
 
+  /*Función para mostrar las preguntas*/
   displayQuestion() {
     const question = this.questions[this.currentQuestionIndex];
     this.shadowRoot.innerHTML = `
@@ -90,6 +57,7 @@ class Pregunta extends HTMLElement {
     this.addEventListeners();
   }
 
+  /*Función para añadir eventos a los botones: correcto e incorrecto + fin de las preguntas*/
   addEventListeners() {
     const optionBtns = this.shadowRoot.querySelectorAll('.optionBtn');
     optionBtns.forEach(button => {
@@ -109,11 +77,12 @@ class Pregunta extends HTMLElement {
           } else {
             this.showResult();
           }
-        }, 1000); // Espera 
+        }, 1000); // Espera en ms
       });
     });
   }
 
+  /*Función para mostrar el resultado del jugador*/
   showResult() {
     let result;
     if (this.correctAnswers >= 5) {
@@ -135,14 +104,7 @@ class Pregunta extends HTMLElement {
     });
   } 
 
-  shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  }
-
+  /*Función para obtener las citas*/
   async getQuote() {
     document.getElementById('preguntas').classList.add('hidden');
     document.getElementById('carga').classList.remove('hidden');
@@ -154,7 +116,47 @@ class Pregunta extends HTMLElement {
     return data;
   }
 
+  /*Función para desordenar las opciones*/
+  shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
   
 }
 customElements.define('elemento-pregunta', Pregunta);
 
+/*Estilos para elementos del js*/
+const styles = `
+
+.options {
+  margin-top: 20px;
+}
+
+.options div {
+  margin-bottom: 5px;
+}
+
+button {
+  padding: 10px; 
+  width:300px; 
+  border-radius: 5px;
+  transition: transform 0.2s;
+}
+
+button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.correct {
+ background-color: #67d467; 
+}
+
+.incorrect {
+ background-color: #cb5555; 
+}
+`;
